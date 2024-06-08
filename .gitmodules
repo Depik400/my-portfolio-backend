@@ -1,3 +1,4 @@
 [submodule "public/frontend"]
 	path = public/frontend
+	branch = main
 	url = https://github.com/Depik400/my-portfolio-frontend.git
