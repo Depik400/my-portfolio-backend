@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"pavelkononov/resume/public"
 )
 
@@ -18,9 +19,12 @@ func MakeHttpServer() {
 	}
 	fileServer := http.FileServer(http.FS(frontend))
 	h.Handle("GET /", fileServer)
-
-	server := &http.Server{Addr: ":8080", Handler: h}
-	fmt.Println("Started on http://localhost:8080")
+	port, exists := os.LookupEnv("PORT")
+	if !exists {
+		log.Fatal("Port not provided. Add `PORT=8080` to .env")
+	}
+	server := &http.Server{Addr: fmt.Sprintf("%s:%s", "", port), Handler: h}
+	fmt.Println("Started on http://localhost:" + port)
 	err := server.ListenAndServe()
 	if err != nil {
 		panic(err)
