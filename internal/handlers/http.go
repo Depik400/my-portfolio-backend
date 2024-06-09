@@ -21,7 +21,8 @@ func MakeHttpServer() {
 	h.Handle("GET /", fileServer)
 	port, exists := os.LookupEnv("PORT")
 	if !exists {
-		log.Fatal("Port not provided. Add `PORT=8080` to .env")
+		log.Printf("Port not provided. Add `PORT=8080` to .env. Default port 8080")
+		port = "8080"
 	}
 	server := &http.Server{Addr: fmt.Sprintf("%s:%s", "", port), Handler: h}
 	fmt.Println("Started on http://localhost:" + port)
