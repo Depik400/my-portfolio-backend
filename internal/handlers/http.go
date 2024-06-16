@@ -18,14 +18,19 @@ func MakeHttpServer() {
 		log.Fatal(er1)
 	}
 	fileServer := http.FileServer(http.FS(frontend))
-	h.Handle("GET /", fileServer)
+	h.HandleFunc("GET /", PublicHttpLoggerFactory(fileServer.ServeHTTP))
 	port, exists := os.LookupEnv("PORT")
 	if !exists {
-		log.Printf("Port not provided. Add `PORT=8080` to .env. Default port 8080")
-		port = "8080"
+		log.Fatal("Port not provided. Add `PORT=8080` to .env")
 	}
-	server := &http.Server{Addr: fmt.Sprintf("%s:%s", "", port), Handler: h}
-	fmt.Println("Started on http://localhost:" + port)
+
+	host, exists := os.LookupEnv("HOST")
+	if !exists {
+		log.Fatal("Host not provided. Add `PORT=8080` to .env")
+	}
+
+	server := &http.Server{Addr: fmt.Sprintf("%s:%s", host, port), Handler: h}
+	fmt.Printf("Started on http://%s:%s\n", host, port)
 	err := server.ListenAndServe()
 	if err != nil {
 		panic(err)
