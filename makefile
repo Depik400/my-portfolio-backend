@@ -3,3 +3,6 @@ all:
 
 go:
 	go build --tags=prod cmd/main.go
+
+macos:
+	set GOOS=darwin&& set GOARCH=arm64&& go build --tags=prod -o macos .\cmd\main.go
