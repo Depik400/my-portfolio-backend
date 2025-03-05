@@ -1,4 +1,6 @@
-# Мой Портфолио Бэкенд (Написано использую copilot)
+Написано через копилот
+
+# Мой Портфолио Бэкенд
 
 ![Размер репозитория GitHub](https://img.shields.io/github/repo-size/Depik400/my-portfolio-backend)
 ![Язык программирования GitHub](https://img.shields.io/github/languages/top/Depik400/my-portfolio-backend)
@@ -25,8 +27,14 @@
 ### Клонирование репозитория
 
 ```bash
-git clone https://github.com/Depik400/my-portfolio-backend.git
+git clone --recurse-submodules https://github.com/Depik400/my-portfolio-backend.git
 cd my-portfolio-backend
+```
+
+Если вы уже клонировали репозиторий без сабмодулей, вы можете инициализировать и обновить их вручную:
+
+```bash
+git submodule update --init --recursive
 ```
 
 ### Построение Docker-образа
@@ -62,3 +70,5 @@ docker run -p 80:80 my-portfolio-backend
 ## Контакт
 
 Depik400 - [Профиль на GitHub](https://github.com/Depik400)
+
+Ссылка на проект: [https://github.com/Depik400/my-portfolio-backend](https://github.com/Depik400/my-portfolio-backend)
